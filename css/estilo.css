@@ -171,6 +171,22 @@ GALERIA
 }
 
 /*=============================================
+EFECTO DE MOUSE
+=============================================*/
+
+#efectoMouse{
+	position:relative;
+	width:100%;
+	overflow:hidden;
+}
+
+#efectoMouse figure{
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+/*=============================================
 PANTALLA DE ESCRITORIO GRANDE - LARGE (lg) - revisamos en portatil o pc
 =============================================*/
 
