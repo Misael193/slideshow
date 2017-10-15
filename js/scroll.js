@@ -9,7 +9,8 @@ var ps = {
     botonera: document.querySelectorAll("nav ul li a"),
     ruta: null,
     intervalo: null,
-    destinoScroll: 0
+    destinoScroll: 0,
+    padding: 0
 }
 
 //metodos
@@ -32,10 +33,12 @@ var ms = {
 
         if(ps.posicionScroll > 100){
             ps.cabezote.style.position = "fixed";
-            ps.cabezote.style.zIndex = 100;
+            ps.cabezote.style.zIndex = 10;
+            ps.padding = 80;
         }else{
             ps.cabezote.style.position = "relative";
-            ps.cabezote.style.zIndex = 100;
+            ps.cabezote.style.zIndex = 0;
+            ps.padding = 180;
         }
 
         if(ps.posicionScroll > ps.cajaScroll.offsetTop-200){
@@ -44,18 +47,24 @@ var ms = {
             }
         }else{
             for(var i=0; i < ps.articulos.length; i++){
-                ps.articulos[i].style.marginLeft = ps.posicionScroll/25 -100 + "%";
+                ps.articulos[i].style.marginLeft = ps.posicionScroll/22.9 -100 + "%";
             }
         }
     },
     desplazamiento: function(ruta){
         ruta.preventDefault();
         ps.ruta = ruta.target.getAttribute("href");
-        ps.destinoScroll = document.querySelector(ps.ruta).offsetTop;
+        ps.destinoScroll = document.querySelector(ps.ruta).offsetTop-ps.padding;
         ps.intervalo = setInterval(function(){
             if(ps.posicionScroll < ps.destinoScroll){
-                ps.posicionScroll+= 100;
+                ps.posicionScroll += 100;
                 if(ps.posicionScroll >= ps.destinoScroll){
+                    ps.posicionScroll = ps.destinoScroll;
+                    clearInterval(ps.intervalo);
+                }
+            }else{
+                ps.posicionScroll -= 100;
+                if(ps.posicionScroll <= ps.destinoScroll){
                     ps.posicionScroll = ps.destinoScroll;
                     clearInterval(ps.intervalo);
                 }
